@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UrbanDiary — Login</title>
+  <link rel="stylesheet" href="style/auth.css" />
+</head>
+<body class="auth-body">
+  <div class="auth-wrap">
+    <a href="index.html" class="back-btn" aria-label="Go back">← Back</a>
+    <div class="auth-card" id="authCard">
+      <h1 class="auth-title">Welcome back</h1>
+
+      <form class="auth-form" id="loginForm" autocomplete="on">
+        <div class="form-row">
+          <input id="email" name="email" type="email" placeholder=" " required />
+          <label for="email">Email address</label>
+        </div>
+
+        <div class="form-row">
+          <input id="password" name="password" type="password" placeholder=" " required />
+          <label for="password">Password</label>
+        </div>
+
+        <div class="auth-cta">
+          <button class="btn-auth" type="submit">Sign in</button>
+          <button type="button" class="btn-ghost" id="forgotBtn">Forgot?</button>
+        </div>
+        <div class="small-note">Keep me signed in on this device.</div>
+      </form>
+
+      <p class="auth-switch">New here? <a class="switch-link" href="signin.html">Create account</a></p>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script type="module" src="js/login.js"></script>
+</body>
+

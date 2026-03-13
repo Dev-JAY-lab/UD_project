@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - UrbanDiary</title>
+  <link rel="stylesheet" href="style/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+
+<body>
+
+  <div class="cont-wrappeer">
+    <nav role="navigation" aria-label="Main navigation">
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true">
+      <label for="menu-toggle" class="hamburger" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <div class="logo">UrbanDiary</div>
+
+      <div class="nav-links" role="menu">
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blogs</a>
+        <a href="profile.html">Profile</a>
+        <a href="library.html">Library</a>
+        <a href="about.html">About</a>
+        <a href="contactus.html">Contact</a>
+      </div>
+
+      <button class="toggle-btn" onclick="toggleDark()" aria-label="Toggle theme"><img src="assets/dark-mode-6682.svg"
+          alt="Toggle theme"></button>
+    </nav>
+    <!-- <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+      </svg> -->
+    </button>
+  </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Let's Connect</h1>
+    <p>Whether you have feedback, partnership ideas, or just want to say hello — we're always happy to hear from you.
+  </section>
+
+  <!-- CONTACT INFO + FORM -->
+  <section class="section">
+    <div class="grid">
+
+      <div class="card">
+        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6-5.33-6-10a6 6 0 1112 0c0 4.67-6 10-6 10z" />
+        </svg>
+        <h3>Our Office</h3>
+        <p>UrbanDiary HQ, Digital Street, India</p>
+      </div>
+
+      <div class="card">
+        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v16H4z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M22 6l-10 7L2 6" />
+        </svg>
+        <h3>Email Us</h3>
+        <p>support@urbandiary.com</p>
+      </div>
+
+      <div class="card">
+        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 5a2 2 0 012-2h2l2 5-2 2a16 16 0 006 6l2-2 5 2v2a2 2 0 01-2 2h-1C9.7 20 4 14.3 4 7V6z" />
+        </svg>
+        <h3>Call Us</h3>
+        <p>+91 98765 43210</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FORM -->
+   <section class="section">
+    <div class="card" style="max-width:700px;margin:auto;">
+      <h2 style="margin-bottom:20px;">Send Us a Message</h2>
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="770770ca-0fe6-444b-97e5-ffc02eb835a1">
+        <input type="text" name="name"  placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea rows="5" name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <h2 style="text-align:center;margin-bottom:40px;">Frequently Asked Questions</h2>
+    <div class="card faq-item">
+      <h4>How quickly do you respond?</h4>
+      <p>We usually reply within 24 hours.</p>
+    </div>
+    <div class="card faq-item">
+      <h4>Can I collaborate with UrbanDiary?</h4>
+      <p>Yes! Reach out via email with your proposal.</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 UrbanDiary | Designed with Love ♥
+  </footer>
+  </div>
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("dark");
+    }
+  </script>
+
+</body>
+
+</html>

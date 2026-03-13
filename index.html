@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UrbanDiary — Human stories & ideas</title>
+  <meta name="description" content="UrbanDiary — A place to read, write, and deepen your understanding." />
+
+  <link rel="stylesheet" href="style/styles.css" />
+</head>
+
+<body>
+  <nav role="navigation" aria-label="Main navigation">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true">
+    <label for="menu-toggle" class="hamburger" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <div class="logo">UrbanDiary</div>
+
+    <div class="nav-links" role="menu">
+      <a href="signin.html">Our story</a>
+      <a href="signin.html">Membership</a>
+      <a href="#signin.html">Write</a>
+      <a href="signin.html" class="nav-auth get-started">Get started ➡</a>
+    </div>
+
+    <button class="toggle-btn" onclick="toggleDark()" aria-label="Toggle theme"><img src="assets/dark-mode-6682.svg" alt="Toggle theme"></button>
+  </nav>
+
+  <main class="ud-page">
+    <section class="landing-hero" id="hero">
+      <div class="hero-left">
+        <h1 class="landing-title">Writes your stories & ideas</h1>
+        <p class="landing-sub">A place to read, write, and deepen your understanding</p>
+        <div class="landing-ctas">
+          <a class="btn primary" href="signin.html">Start reading</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-visual">
+          <div class="hero-illustration">
+            <div class="hero-decoration deco-1"></div>
+            <div class="hero-decoration deco-2"></div>
+            <!-- Placeholder for illustration/image -->
+            📖
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="contact" class="ud-footer">
+      <div class="container footer-inner">
+        <nav class="footer-links">
+          <a href="#">Help</a>
+          <a href="#">Status</a>
+          <a href="#">About</a>
+          <a href="#">Careers</a>
+          <a href="#">Press</a>
+          <a href="#">Blog</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Text to speech</a>
+        </nav>
+      </div>
+    </footer>
+  </main>
+
+  <script src="js/auth.js"></script>
+  <script src="js/landing.js" defer></script>
+</body>
+</html>
+

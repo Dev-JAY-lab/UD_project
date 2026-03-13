@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - UrbanDiary</title>
+  <link rel="stylesheet" href="style/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav>
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <div class="logo">UrbanDiary</div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blogs</a>
+      <a href="profile.html">Profile</a>
+      <a href="library.html">Library</a>
+      <a href="about.html">About</a>
+      <a href="contactus.html">Contact Us</a>
+    </div>
+
+    <div class="user-info">
+      <span id="userName" class="user-name"></span>
+      <button class="btn-logout" id="logoutBtn">Logout ➜]</button>
+    </div>
+
+    <button class="toggle-btn" onclick="toggleDark()"><img src="assets/dark-mode-6682.svg" alt="Toggle"></button>
+  </nav>
+
+  <div class="about-page">
+
+<div class="container">
+
+  <section class="hero">
+    <h1>About UrbanDiary</h1>
+    <p>
+      Welcome to UrbanDiary - a modern blogging platform built for creators who want
+      a clean and powerful space to share ideas, stories, and experiences with the world.
+    </p>
+  </section>
+
+  <section class="cards">
+
+    <div class="card">
+      <!-- Vision SVG -->
+      <svg class="icon" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="1"></circle>
+        <path d="M12 5C5.636 5 1 12 1 12s4.636 7 11 7 11-7 11-7-4.636-7-11-7z"></path>
+      </svg>
+      <h3>Our Vision</h3>
+      <p>
+        To empower every writer with a minimal, distraction-free 
+        publishing experience designed for the modern web.
+      </p>
+    </div>
+
+    <div class="card">
+      <!-- Features SVG -->
+      <svg class="icon" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+      </svg>
+      <h3>What We Offer</h3>
+      <p>
+        Secure authentication, real-time blog publishing, and a fully 
+        responsive interface built with performance in mind.
+      </p>
+    </div>
+
+    <div class="card">
+      <!-- Community SVG -->
+      <svg class="icon" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+      <h3>Community First</h3>
+      <p>
+        UrbanDiary is more than a platform — it’s a growing digital
+        community of storytellers and thinkers.
+      </p>
+    </div>
+
+  </section>
+
+  <section class="section-block">
+    <h2>Our Mission</h2>
+    <p>
+      We focus on simplicity, smooth user experience, and meaningful
+      storytelling. UrbanDiary is built to connect creators and readers
+      through modern design and powerful backend integration.
+    </p>
+  </section>
+
+  <!-- Why Choose UrbanDiary Section -->
+  <section class="why-section">
+    <h2>Why Choose UrbanDiary?</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <svg class="feature-icon" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L15 10H23L17 14L19 22L12 18L5 22L7 14L1 10H9L12 2Z" fill="currentColor" stroke="currentColor"/>
+          <circle cx="12" cy="12" r="1" fill="currentColor" class="sparkle-dot" opacity="0"/>
+        </svg>
+        <h4>Minimalist Design</h4>
+        <p>A clean, distraction-free interface that puts your content front and center, allowing readers to focus on what matters most.</p>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="11" width="18" height="10" rx="2" stroke="currentColor"/>
+          <path d="M7 11V7C7 4.239 9.239 2 12 2C14.761 2 17 4.239 17 7V11" stroke="currentColor" class="lock-shackle"/>
+          <circle cx="12" cy="15.5" r="1" fill="currentColor"/>
+        </svg>
+        <h4>Secure & Private</h4>
+        <p>Your stories are protected with enterprise-grade security and privacy controls. You have full control over your content.</p>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" fill="currentColor" stroke="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13 2L3 14H9L11 22L21 10H15L13 2Z" class="lightning-bolt"/>
+        </svg>
+        <h4>Lightning Fast</h4>
+        <p>Optimized performance ensures your blog loads instantly, keeping your readers engaged and improving SEO rankings.</p>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor"/>
+          <line x1="12" y1="19" x2="12" y2="19.5" stroke="currentColor" stroke-width="2.5" class="phone-dot"/>
+          <rect x="7" y="4" width="10" height="12" rx="1" fill="none" stroke="currentColor" class="phone-screen" opacity="0.5"/>
+        </svg>
+        <h4>Mobile Responsive</h4>
+        <p>Perfect reading experience on any device. Your stories look beautiful on desktops, tablets, and smartphones.</p>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" class="globe-circle"/>
+          <path d="M2 12H22" stroke="currentColor"/>
+          <path d="M12 2C16.4183 2 20 6.477 20 11.5C20 16.523 16.4183 21 12 21C7.58172 21 4 16.523 4 11.5" stroke="currentColor" class="globe-curve" opacity="0.6"/>
+        </svg>
+        <h4>Global Reach</h4>
+        <p>Connect with readers worldwide. Share your unique perspective and build a community around your passion.</p>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="14" width="3" height="7" stroke="currentColor" class="bar-1"/>
+          <rect x="10.5" y="9" width="3" height="12" stroke="currentColor" class="bar-2"/>
+          <rect x="18" y="4" width="3" height="17" stroke="currentColor" class="bar-3"/>
+          <polyline points="3 20 10.5 15 18 18 21 10" stroke="currentColor" fill="none" class="chart-line" opacity="0.6"/>
+        </svg>
+        <h4>Analytics</h4>
+        <p>Track your blog performance with detailed analytics. Understand your audience and grow your readership.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story Section -->
+  <section class="story-section">
+    <h2>Our Story</h2>
+    <p>
+      UrbanDiary was born from a simple idea: what if blogging was simple, beautiful, and accessible to everyone? 
+      We realized that most blogging platforms were cluttered, complicated, and overwhelming for creators who just wanted to share their thoughts.
+    </p>
+    <p>
+      In 2024, our team of passionate developers and designers came together to create a platform that combines 
+      elegant design with powerful functionality. We wanted to build something that respects both the writer's voice 
+      and the reader's time.
+    </p>
+    <p>
+      Today, UrbanDiary is home to thousands of creators sharing millions of stories. From personal journals to 
+      professional insights, from creative fiction to lifestyle tips - our platform empowers voices from around the world.
+    </p>
+  </section>
+
+  <!-- Values Section -->
+  <section class="values-section">
+    <h2>Our Core Values</h2>
+    <div class="values-grid">
+      <div class="value-box">
+        <h4>Creativity</h4>
+        <p>We believe everyone has a story worth telling. We provide the tools to tell it beautifully.</p>
+      </div>
+      <div class="value-box">
+        <h4>Simplicity</h4>
+        <p>Less is more. We strip away complexity to focus on what truly matters - your content.</p>
+      </div>
+      <div class="value-box">
+        <h4>Community</h4>
+        <p>Great stories deserve great readers. We build connections between creators and their audience.</p>
+      </div>
+      <div class="value-box">
+        <h4>Innovation</h4>
+        <p>Technology should enhance creativity, not hinder it. We constantly evolve to serve you better.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="cta-section">
+    <h2>Ready to Share Your Story?</h2>
+    <p>Join thousands of creators who are already sharing their voices on UrbanDiary.</p>
+    <button class="cta-button" onclick="window.location.href='signin.html'">Start Blogging Today</button>
+  </section>
+</div>
+<footer>
+  © 2026 UrbanDiary | Designed with Love ♥
+</footer>
+
+</div>
+
+<script type="module" src="js/app.js" defer></script>
+</body>
+</html>

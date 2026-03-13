@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UrbanDiary Blog</title>
+  <link rel="stylesheet" href="style/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav>
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <div class="logo">UrbanDiary</div>
+
+    <div class="search-container">
+      <input type="text" class="search" id="searchInput" placeholder="Search Blog 🔍︎">
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blogs</a>
+      <a href="profile.html">Profile</a>
+      <a href="library.html">Library</a>
+      <a href="about.html">About</a>
+      <a href="contactus.html">Contact Us</a>
+    </div>
+
+    <div class="user-info">
+      <span id="userName" class="user-name"></span>
+      <button class="btn-logout" id="logoutBtn">Logout ➜]</button>
+    </div>
+
+    <button class="toggle-btn" onclick="toggleDark()"><img src="assets/dark-mode-6682.svg" alt="Toggle"></button>
+  </nav>
+  <!-- <div class="page"> -->
+  <!-- CONTENT -->
+  <div class="container">
+    <!-- FEED -->
+    <div class="feed" id="blogFeed"></div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-grid">
+        <!-- TRENDING BLOGS -->
+        <div id="trendingSection" class="sidebar-column"></div>
+
+        <!-- RECENT BLOGS -->
+        <div id="recentSection" class="sidebar-column"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
+    integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"
+    integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script src="js/auth.js"></script>
+  <script type="module" src="js/home.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UrbanDiary — Sign Up</title>
+  <link rel="stylesheet" href="style/auth.css" />
+</head>
+<body class="auth-body">
+  <div class="auth-wrap">
+    <a href="index.html" class="back-btn" aria-label="Go back">← Back</a>
+    <div class="auth-card" id="authCard">
+      <h1 class="auth-title">Create your account</h1>
+
+      <form class="auth-form" id="signupForm" autocomplete="on">
+        <div class="form-row">
+          <input id="name" name="name" type="text" placeholder=" " required />
+          <label for="name">Full name</label>
+        </div>
+
+        <div class="form-row">
+          <input id="email" name="email" type="email" placeholder=" " required />
+          <label for="email">Email address</label>
+        </div>
+
+        <div class="form-row">
+          <input id="password" name="password" type="password" placeholder=" " minlength="6" required />
+          <label for="password">Password</label>
+        </div>
+
+        <div class="form-row">
+          <input id="confirm" name="confirm" type="password" placeholder=" " required />
+          <label for="confirm">Confirm password</label>
+        </div>
+
+        <div class="auth-cta">
+          <button id="signupBtn" class="btn-auth" type="submit">Create account</button>
+          <button type="button" class="btn-ghost" id="demoBtn">Demo</button>
+        </div>
+        <div class="small-note">By creating an account you agree to our friendly terms.</div>
+      </form>
+
+      <p class="auth-switch">Already have an account? <a class="switch-link" href="login.html">Login</a></p>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script type="module" src="js/signup.js"></script>
+</body>
+</html>
+

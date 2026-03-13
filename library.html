@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanDiary Library</title>
+    <link rel="stylesheet" href="style/styles.css">
+</head>
+<body>
+
+<nav>
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+    
+    <div class="logo">UrbanDiary</div>
+    
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blogs</a>
+        <a href="profile.html">Profile</a>
+        <a href="library.html">Library</a>
+        <a href="about.html">About</a>
+        <a href="contactus.html">Contact</a>
+    </div>
+    
+    <div class="user-info">
+      <span id="userName" class="user-name"></span>
+      <button class="btn-logout" id="logoutBtn">Logout ➜]</button>
+    </div>
+    
+    <button class="toggle-btn" onclick="toggleDark()"><img src="assets/dark-mode-6682.svg" alt="Toggle"></button>
+</nav>
+
+<div class="library-container">
+    <div class="header-section">
+        <h1>Your library</h1>
+        <div class="header-controls">
+            <button id="themeToggle" class="theme-toggle" aria-pressed="false" title="Toggle theme">🌙</button>
+            <button class="btn-new-list">New list</button>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active" onclick="openTab(event, 'your-lists')">Your lists</div>
+        <div class="tab" onclick="openTab(event, 'saved-lists')">Saved lists</div>
+        <div class="tab" onclick="openTab(event, 'highlights')">Highlights</div>
+        <div class="tab" onclick="openTab(event, 'reading-history')">Reading history</div>
+        <div class="tab" onclick="openTab(event, 'responses')">Responses</div>
+    </div>
+
+    <hr class="divider">
+
+    <div id="your-lists" class="tab-content active">
+        <div class="list-card">
+            <div class="list-info">
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/20" alt="user">
+                    <span>Demo User</span>
+                </div>
+                <h2 class="list-title">Reading list</h2>
+                <div class="list-footer">
+                    <span>No stories <span class="lock-icon">🔒</span></span>
+                    <span class="more-options">...</span>
+                </div>
+            </div>
+            <div class="list-preview">
+                <div class="preview-box main"></div>
+                <div class="preview-box side"></div>
+                <div class="preview-box side"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="saved-lists" class="tab-content"></div>
+    <div id="highlights" class="tab-content"></div>
+    <div id="reading-history" class="tab-content"></div>
+    <div id="responses" class="tab-content"></div>
+</div>
+<footer>
+  © 2026 UrbanDiary | Designed with Love
+</footer>
+<script src="js/auth.js"></script>
+<script type="module" src="js/library.js" defer></script>
+</body>
+</html>
