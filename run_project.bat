@@ -4,7 +4,7 @@ echo    URBANDIARY - STARTING FULLSTACK PROJECT
 echo ====================================================
 
 :: Go into backend and start server
-cd /d "%~dp0Blog_WebApplication\backend"
+cd /d "%~dp0backend"
 
 :: Start the server in a new window
 echo [Step 1] Initializing Server on http://localhost:5000...
