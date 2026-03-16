@@ -3,7 +3,7 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-aut
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
-     apiKey: "AIzaSyBeJ-BA-kM1r7y3mZDuZzauepHzWjbMtYo",
+     //apiKey: "AIzaSyBeJ-BA-kM1r7y3mZDuZzauepHzWjbMtYo", this api is used .So no use case of this api.
     authDomain: "urbandiary-82b27.firebaseapp.com",
     projectId: "urbandiary-82b27",
     storageBucket: "urbandiary-82b27.firebasestorage.app",
