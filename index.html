@@ -8,6 +8,7 @@
   <meta name="description" content="UrbanDiary — A place to read, write, and deepen your understanding." />
 
   <link rel="stylesheet" href="style/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -19,35 +20,77 @@
       <span></span>
     </label>
 
-    <div class="logo">UrbanDiary</div>
+    <div class="nav-center">
+      <div class="logo">UrbanDiary</div>
 
-    <div class="nav-links" role="menu">
-      <a href="signin.html">Our story</a>
-      <a href="signin.html">Membership</a>
-      <a href="#signin.html">Write</a>
-      <a href="signin.html" class="nav-auth get-started">Get started ➡</a>
+      <div class="nav-links" role="menu">
+        <a href="signin.html">Our story</a>
+        <a href="signin.html">Membership</a>
+        <a href="#signin.html">Write</a>
+        <a href="signin.html" class="nav-auth get-started">Get started ➡</a>
+      </div>
     </div>
 
-    <button class="toggle-btn" onclick="toggleDark()" aria-label="Toggle theme"><img src="assets/dark-mode-6682.svg" alt="Toggle theme"></button>
   </nav>
 
   <main class="ud-page">
+    <!-- Hero Section -->
     <section class="landing-hero" id="hero">
-      <div class="hero-left">
-        <h1 class="landing-title">Writes your stories & ideas</h1>
-        <p class="landing-sub">A place to read, write, and deepen your understanding</p>
-        <div class="landing-ctas">
-          <a class="btn primary" href="signin.html">Start reading</a>
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="landing-title">Write your stories & ideas</h1>
+          <p class="landing-sub">A place to read, write, and deepen your understanding</p>
+          <div class="landing-ctas">
+            <a class="btn primary start-reading" href="signin.html">
+              <span class="btn-text">Start reading</span>
+              <span class="btn-arrow">→</span>
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div class="hero-right">
         <div class="hero-visual">
           <div class="hero-illustration">
             <div class="hero-decoration deco-1"></div>
             <div class="hero-decoration deco-2"></div>
-            <!-- Placeholder for illustration/image -->
-            📖
+            <div class="hero-decoration deco-3"></div>
+            <div class="book-icon">📚</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator">
+        <div class="scroll-text">Scroll to explore ↓</div>
+        <div class="scroll-mouse">
+          <div class="scroll-wheel"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="about-content">
+        <div class="about-text">
+          <h2 class="about-title">Discover. Learn. Grow.</h2>
+          <p class="about-description">
+            Your journey starts here — scroll down and explore something meaningful.
+          </p>
+          <div class="about-features">
+            <div class="feature">
+              <div class="feature-icon">✍️</div>
+              <h3>Write & Share</h3>
+              <p>Express your thoughts and connect with readers worldwide</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">📖</div>
+              <h3>Discover Stories</h3>
+              <p>Explore diverse perspectives and meaningful content</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">🌱</div>
+              <h3>Grow Together</h3>
+              <p>Learn from others and develop your writing skills</p>
+            </div>
           </div>
         </div>
       </div>
@@ -73,5 +116,5 @@
   <script src="js/auth.js"></script>
   <script src="js/landing.js" defer></script>
 </body>
-</html>
 
+</html>
