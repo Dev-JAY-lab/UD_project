@@ -1,11 +1,13 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>UrbanDiary — Sign Up</title>
   <link rel="stylesheet" href="style/auth.css" />
 </head>
+
 <body class="auth-body">
   <div class="auth-wrap">
     <a href="index.html" class="back-btn" aria-label="Go back">← Back</a>
@@ -26,11 +28,23 @@
         <div class="form-row">
           <input id="password" name="password" type="password" placeholder=" " minlength="6" required />
           <label for="password">Password</label>
+          <button type="button" class="password-toggle" data-target="password" aria-label="Toggle password visibility">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
         </div>
 
         <div class="form-row">
           <input id="confirm" name="confirm" type="password" placeholder=" " required />
           <label for="confirm">Confirm password</label>
+          <button type="button" class="password-toggle" data-target="confirm" aria-label="Toggle password visibility">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
         </div>
 
         <div class="auth-cta">
@@ -47,5 +61,5 @@
   <script src="js/auth.js"></script>
   <script type="module" src="js/signup.js"></script>
 </body>
-</html>
 
+</html>
