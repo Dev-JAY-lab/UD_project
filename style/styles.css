@@ -1,11 +1,11 @@
 :root {
-  --bg: #0a0f1c;
-  --text: #ffffff;
-  --muted: #94a3b8;
-  --card: #1a2332;
-  --border: #2a3441;
-  --shadow-light: rgba(0, 0, 0, 0.3);
-  --shadow-dark: rgba(255, 255, 255, 0.1);
+  --bg: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --card: #f8fafc;
+  --border: #e2e8f0;
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  --shadow-dark: rgba(0, 0, 0, 0.1);
   --primary: #3b82f6;
   --primary-hover: #2563eb;
   --secondary: #6366f1;
