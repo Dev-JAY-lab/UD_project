@@ -39,18 +39,104 @@ document.addEventListener("DOMContentLoaded", async () => {
       blogs.forEach((blog) => {
         const card = document.createElement("div");
         card.className = "card";
-        card.innerHTML = `
-                    <div class="card-content">
-                        <h2>${blog.title}</h2>
-                        <p>${blog.content.substring(0, 100)}...</p>
-                        <div class="meta">${new Date(blog.createdAt).toLocaleDateString()}</div>
-                    </div>
-                `;
-        card.style.cursor = "pointer";
-        card.addEventListener("click", () => {
+        card.style.position = "relative"; // for absolute positioning of dropdown
+        
+        const cardContent = document.createElement("div");
+        cardContent.className = "card-content";
+        cardContent.style.cursor = "pointer";
+        cardContent.innerHTML = `
+            <div style="padding-right: 30px;">
+                <h2>${blog.title}</h2>
+            </div>
+            <p>${blog.content.substring(0, 100)}...</p>
+            <div class="meta">${new Date(blog.createdAt).toLocaleDateString()}</div>
+        `;
+        
+        cardContent.addEventListener("click", () => {
           sessionStorage.setItem("selectedBlogId", blog._id);
           window.location.href = "blog-detail.html";
         });
+        card.appendChild(cardContent);
+
+        // Three Dot Menu Container
+        const menuContainer = document.createElement("div");
+        menuContainer.className = "menu-options";
+        menuContainer.style.position = "absolute";
+        menuContainer.style.top = "15px";
+        menuContainer.style.right = "15px";
+
+        const dotBtn = document.createElement("button");
+        dotBtn.className = "menu-dot-btn";
+        dotBtn.innerHTML = "⋮";
+        
+        const dropdown = document.createElement("div");
+        dropdown.className = "menu-dropdown";
+
+        const editOpt = document.createElement("button");
+        editOpt.innerHTML = "✏️ Edit";
+        editOpt.onclick = async (e) => {
+          e.stopPropagation();
+          dropdown.classList.remove("show"); // hide menu
+          const newTitle = prompt("Edit Title:", blog.title);
+          if (newTitle === null) return;
+          
+          const newContent = prompt("Edit Content:", blog.content);
+          if (newContent === null) return;
+
+          if (!newTitle.trim() || !newContent.trim()) {
+            alert("Title and content cannot be empty.");
+            return;
+          }
+
+          try {
+            await api.updateOwnBlog(blog._id, { title: newTitle, content: newContent }, token);
+            alert("Blog updated successfully!");
+            loadProfile(); 
+          } catch (err) {
+            console.error(err);
+            alert("Failed to update blog.");
+          }
+        };
+
+        const deleteOpt = document.createElement("button");
+        deleteOpt.className = "delete-opt";
+        deleteOpt.innerHTML = "🗑️ Delete";
+        deleteOpt.onclick = async (e) => {
+          e.stopPropagation();
+          dropdown.classList.remove("show"); // hide menu
+          if (!confirm("Are you sure you want to delete this blog?")) return;
+          
+          try {
+            await api.deleteOwnBlog(blog._id, token);
+            alert("Blog deleted successfully!");
+            loadProfile(); 
+          } catch (err) {
+            console.error(err);
+            alert("Failed to delete blog.");
+          }
+        };
+
+        dropdown.appendChild(editOpt);
+        dropdown.appendChild(deleteOpt);
+
+        dotBtn.onclick = (e) => {
+           e.stopPropagation();
+           // Hide all other dropdowns
+           document.querySelectorAll(".menu-dropdown.show").forEach(el => {
+               if (el !== dropdown) el.classList.remove("show");
+           });
+           dropdown.classList.toggle("show");
+        };
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", () => {
+             dropdown.classList.remove("show");
+        });
+
+        menuContainer.appendChild(dotBtn);
+        menuContainer.appendChild(dropdown);
+        card.appendChild(menuContainer);
+
         container.appendChild(card);
       });
     } catch (err) {
@@ -93,6 +179,46 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (err) {
       console.error("Error creating blog:", err);
       alert("An error occurred while publishing");
+    }
+  };
+
+  // Edit Profile
+  window.editProfile = async () => {
+    const currentName = document.getElementById("profileName").textContent;
+    let currentBio = document.getElementById("profileBio").textContent;
+    if (currentBio === "No bio yet.") currentBio = "";
+
+    const newUsername = prompt("Enter new username:", currentName);
+    if (newUsername === null) return; 
+
+    const newBio = prompt("Enter new bio:", currentBio);
+    if (newBio === null) return; 
+
+    if (!newUsername.trim()) {
+      alert("Username cannot be empty.");
+      return;
+    }
+
+    try {
+      const response = await api.updateUserProfile({ username: newUsername, bio: newBio }, token);
+
+      // Update local storage so other pages reflect the new username
+      const updatedUser = { ...currentUser, username: response.username, bio: response.bio };
+      localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+
+      // Reload profile data on page
+      loadProfile();
+      
+      // Update the navbar
+      const userNameEl = document.getElementById('userName');
+      if (userNameEl) {
+          userNameEl.textContent = 'Welcome, ' + response.username;
+      }
+
+      alert("Profile updated successfully!");
+    } catch (err) {
+      console.error("Error updating profile:", err);
+      alert("Failed to update profile: " + (err.message || ""));
     }
   };
 

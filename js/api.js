@@ -120,6 +120,52 @@ const api = {
     }
     return res.json();
   },
+
+  async updateUserProfile(userData, token) {
+    const res = await fetch(`${API_URL}/users/me`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": token,
+      },
+      body: JSON.stringify(userData),
+    });
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(errorText || `HTTP error! status: ${res.status}`);
+    }
+    return res.json();
+  },
+
+  async updateOwnBlog(id, blogData, token) {
+    const res = await fetch(`${API_URL}/blogs/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": token,
+      },
+      body: JSON.stringify(blogData),
+    });
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(errorText || `HTTP error! status: ${res.status}`);
+    }
+    return res.json();
+  },
+
+  async deleteOwnBlog(id, token) {
+    const res = await fetch(`${API_URL}/blogs/${id}`, {
+      method: "DELETE",
+      headers: {
+        "x-auth-token": token,
+      },
+    });
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(errorText || `HTTP error! status: ${res.status}`);
+    }
+    return res.json();
+  },
 };
 
 export default api;

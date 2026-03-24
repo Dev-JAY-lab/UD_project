@@ -169,4 +169,50 @@ router.put("/save/:id", auth, async (req, res) => {
   }
 });
 
+// @route   PUT api/blogs/:id
+// @desc    Update a blog (title and content)
+router.put("/:id", auth, async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+      return res.status(404).json({ msg: "Blog not found" });
+    }
+    if (blog.author.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "User not authorized" });
+    }
+
+    const { title, content } = req.body;
+    if (title) blog.title = title;
+    if (content) blog.content = content;
+
+    await blog.save();
+    res.json(blog);
+  } catch (err) {
+    if (err.kind === 'ObjectId') return res.status(404).json({ msg: "Blog not found" });
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   DELETE api/blogs/:id
+// @desc    Delete a blog
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+      return res.status(404).json({ msg: "Blog not found" });
+    }
+    if (blog.author.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "User not authorized" });
+    }
+
+    await blog.deleteOne();
+    res.json({ msg: "Blog removed" });
+  } catch (err) {
+    if (err.kind === 'ObjectId') return res.status(404).json({ msg: "Blog not found" });
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;

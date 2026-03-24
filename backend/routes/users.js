@@ -31,4 +31,25 @@ router.get('/me', auth, async (req, res) => {
     }
 });
 
+// @route   PUT api/users/me
+// @desc    Update current user profile
+router.put('/me', auth, async (req, res) => {
+    const { username, bio } = req.body;
+    try {
+        const user = await User.findById(req.user.id);
+        if (!user) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+        
+        if (username) user.username = username;
+        if (bio !== undefined) user.bio = bio;
+
+        await user.save();
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;
