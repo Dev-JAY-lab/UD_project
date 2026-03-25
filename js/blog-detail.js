@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div id="commentList" style="margin:20px 0;">
                 ${blog.comments.map(c => `
                     <div class="comment-item" style="padding:15px; border-bottom:1px solid #eee;">
-                        <span style="font-weight:bold;">${c.user.username}</span>
+                        <span style="font-weight:bold;">${c.user ? c.user.username : 'Unknown User'}</span>
                         <p style="margin-top:5px;">${c.text}</p>
                         <small style="color:var(--muted);">${new Date(c.createdAt).toLocaleDateString()}</small>
                     </div>

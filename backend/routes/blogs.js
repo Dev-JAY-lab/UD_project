@@ -38,6 +38,7 @@ router.get("/", async (req, res) => {
   try {
     const blogs = await Blog.find()
       .populate("author", "username profilePic")
+      .populate("comments.user", "username")
       .sort({ createdAt: -1 });
     res.json(blogs);
   } catch (err) {
