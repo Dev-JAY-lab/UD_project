@@ -28,7 +28,7 @@
     }
 
     // UI Setup
-    document.addEventListener("DOMContentLoaded", () => {
+    const initUI = () => {
         const userNameEl = document.getElementById('userName');
         const logoutBtn = document.getElementById('logoutBtn');
 
@@ -45,7 +45,13 @@
         }
 
         if (localStorage.getItem('theme') !== 'light') document.body.classList.add('dark');
-    });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener("DOMContentLoaded", initUI);
+    } else {
+        initUI();
+    }
 
     window.toggleDark = () => {
         document.body.classList.toggle('dark');

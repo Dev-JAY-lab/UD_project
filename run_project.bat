@@ -11,7 +11,7 @@ echo [Step 1] Initializing Server on http://localhost:5000...
 start "URBANDIARY_SERVER" cmd /k "node server.js"
 
 :: Wait for server to be ready
-timeout /t 4 /nobreak > NUL
+timeout /t 4 /nobreak > NUL1
 
 :: Open the website via the server URL, NOT the file path
 echo [Step 2] Opening UrbanDiary Website...

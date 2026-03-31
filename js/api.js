@@ -1,5 +1,27 @@
 const API_URL = "http://localhost:5000/api";
 
+// Global response handler
+async function handleResponse(res) {
+  if (!res.ok) {
+    const errorText = await res.text();
+    if (res.status === 401 || (res.status === 404 && errorText.includes("User not found"))) {
+      localStorage.clear();
+      window.location.href = "login.html";
+      return;
+    }
+    throw new Error(errorText || `HTTP error! status: ${res.status}`);
+  }
+
+  const contentType = res.headers.get("content-type");
+  if (contentType && contentType.includes("application/json")) {
+    return res.json();
+  } else {
+    // some endpoints like delete return raw text or empty json
+    const text = await res.text();
+    return text ? JSON.parse(text) : {};
+  }
+}
+
 const api = {
   async signup(userData) {
     const res = await fetch(`${API_URL}/auth/signup`, {
@@ -7,18 +29,7 @@ const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),
     });
-
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || `HTTP error! status: ${res.status}`);
-    }
-
-    const contentType = res.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
-      return res.json();
-    } else {
-      throw new Error("Server returned non-JSON response");
-    }
+    return handleResponse(res);
   },
 
   async login(userData) {
@@ -27,26 +38,12 @@ const api = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),
     });
-
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || `HTTP error! status: ${res.status}`);
-    }
-
-    const contentType = res.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
-      return res.json();
-    } else {
-      throw new Error("Server returned non-JSON response");
-    }
+    return handleResponse(res);
   },
 
   async getBlogs() {
     const res = await fetch(`${API_URL}/blogs`);
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
+    return handleResponse(res);
   },
 
   async createBlog(formData, token) {
@@ -55,11 +52,7 @@ const api = {
       headers: { "x-auth-token": token },
       body: formData,
     });
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || `HTTP error! status: ${res.status}`);
-    }
-    return res.json();
+    return handleResponse(res);
   },
 
   async likeBlog(id, token) {
@@ -67,11 +60,7 @@ const api = {
       method: "PUT",
       headers: { "x-auth-token": token },
     });
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || `HTTP error! status: ${res.status}`);
-    }
-    return res.json();
+    return handleResponse(res);
   },
 
   async commentOnBlog(id, text, token) {
@@ -83,11 +72,7 @@ const api = {
       },
       body: JSON.stringify({ text }),
     });
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || `HTTP error! status: ${res.status}`);
-    }
-    return res.json();
+    return handleResponse(res);
   },
 
   async saveBlog(id, token) {
@@ -95,30 +80,19 @@ const api = {
       method: "PUT",
       headers: { "x-auth-token": token },
     });
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || `HTTP error! status: ${res.status}`);
-    }
-    return res.json();
+    return handleResponse(res);
   },
 
   async getUserProfile(userId) {
     const res = await fetch(`${API_URL}/users/profile/${userId}`);
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    return res.json();
+    return handleResponse(res);
   },
 
   async getCurrentUser(token) {
     const res = await fetch(`${API_URL}/users/me`, {
       headers: { "x-auth-token": token },
     });
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || `HTTP error! status: ${res.status}`);
-    }
-    return res.json();
+    return handleResponse(res);
   },
 
   async updateUserProfile(userData, token) {
@@ -130,11 +104,7 @@ const api = {
       },
       body: JSON.stringify(userData),
     });
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || `HTTP error! status: ${res.status}`);
-    }
-    return res.json();
+    return handleResponse(res);
   },
 
   async updateOwnBlog(id, blogData, token) {
@@ -146,11 +116,7 @@ const api = {
       },
       body: JSON.stringify(blogData),
     });
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || `HTTP error! status: ${res.status}`);
-    }
-    return res.json();
+    return handleResponse(res);
   },
 
   async deleteOwnBlog(id, token) {
@@ -160,11 +126,7 @@ const api = {
         "x-auth-token": token,
       },
     });
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(errorText || `HTTP error! status: ${res.status}`);
-    }
-    return res.json();
+    return handleResponse(res);
   },
 };
 

@@ -14,6 +14,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Load Profile Data
   async function loadProfile() {
+    // Pre-populate to avoid showing "DemoUser" during loading or errors
+    if (currentUser.username) {
+        document.getElementById("profileName").textContent = currentUser.username;
+        document.getElementById("profileUsername").textContent = `@${currentUser.username}`;
+        document.getElementById("avatarLetter").textContent = currentUser.username.charAt(0).toUpperCase();
+    }
+
     try {
       const data = await api.getUserProfile(currentUser.id);
       const user = data.user;
@@ -27,6 +34,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("avatarLetter").textContent = user.username
         .charAt(0)
         .toUpperCase();
+
+      const instaLinkEl = document.getElementById("instaLink");
+      if (user.instagramLink) {
+          instaLinkEl.href = user.instagramLink;
+          instaLinkEl.style.display = "inline-block";
+      } else {
+          instaLinkEl.style.display = "none";
+      }
 
       // Render user's blogs
       const container = document.getElementById("blogContainer");
@@ -178,7 +193,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     } catch (err) {
       console.error("Error creating blog:", err);
-      alert("An error occurred while publishing");
+      let errorMsg = "An error occurred while publishing";
+      try {
+        const errObj = JSON.parse(err.message);
+        if (errObj.errors && errObj.errors.length > 0) {
+          errorMsg = errObj.errors.map(e => e.msg).join("\n");
+        } else if (errObj.msg) {
+          errorMsg = errObj.msg;
+        }
+      } catch(e) { /* ignore JSON parse error */ }
+      
+      alert(errorMsg);
     }
   };
 
@@ -187,6 +212,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const currentName = document.getElementById("profileName").textContent;
     let currentBio = document.getElementById("profileBio").textContent;
     if (currentBio === "No bio yet.") currentBio = "";
+    
+    const instaLinkEl = document.getElementById("instaLink");
+    let currentInsta = instaLinkEl.style.display !== "none" ? instaLinkEl.href : "";
 
     const newUsername = prompt("Enter new username:", currentName);
     if (newUsername === null) return; 
@@ -194,16 +222,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     const newBio = prompt("Enter new bio:", currentBio);
     if (newBio === null) return; 
 
+    const newInsta = prompt("Enter new Instagram URL (leave blank to remove):", currentInsta);
+    if (newInsta === null) return;
+
     if (!newUsername.trim()) {
       alert("Username cannot be empty.");
       return;
     }
 
     try {
-      const response = await api.updateUserProfile({ username: newUsername, bio: newBio }, token);
+      const response = await api.updateUserProfile({ 
+          username: newUsername, 
+          bio: newBio, 
+          instagramLink: newInsta 
+      }, token);
 
       // Update local storage so other pages reflect the new username
-      const updatedUser = { ...currentUser, username: response.username, bio: response.bio };
+      const updatedUser = { ...currentUser, username: response.username, bio: response.bio, instagramLink: response.instagramLink };
       localStorage.setItem("currentUser", JSON.stringify(updatedUser));
 
       // Reload profile data on page

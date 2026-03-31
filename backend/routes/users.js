@@ -34,7 +34,7 @@ router.get('/me', auth, async (req, res) => {
 // @route   PUT api/users/me
 // @desc    Update current user profile
 router.put('/me', auth, async (req, res) => {
-    const { username, bio } = req.body;
+    const { username, bio, instagramLink } = req.body;
     try {
         const user = await User.findById(req.user.id);
         if (!user) {
@@ -43,6 +43,7 @@ router.put('/me', auth, async (req, res) => {
         
         if (username) user.username = username;
         if (bio !== undefined) user.bio = bio;
+        if (instagramLink !== undefined) user.instagramLink = instagramLink;
 
         await user.save();
         res.json(user);

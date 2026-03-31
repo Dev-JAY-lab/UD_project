@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   bio: { type: String, default: '' },
   profilePic: { type: String, default: '' },
+  instagramLink: { type: String, default: '' },
   savedBlogs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Blog' }]
 }, { timestamps: true });
 

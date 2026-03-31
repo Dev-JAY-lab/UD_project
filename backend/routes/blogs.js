@@ -151,7 +151,7 @@ router.put("/save/:id", auth, async (req, res) => {
       return res.status(404).json({ msg: "Blog not found" });
     }
 
-    if (user.savedBlogs.includes(req.params.id)) {
+    if (user.savedBlogs.map((id) => id.toString()).includes(req.params.id)) {
       user.savedBlogs = user.savedBlogs.filter(
         (id) => id.toString() !== req.params.id,
       );
