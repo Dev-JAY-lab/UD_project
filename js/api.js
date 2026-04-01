@@ -128,6 +128,18 @@ const api = {
     });
     return handleResponse(res);
   },
+
+  async generateAIBlog(topic, token) {
+    const res = await fetch(`${API_URL}/blogs/ai-generate`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": token,
+      },
+      body: JSON.stringify({ topic }),
+    });
+    return handleResponse(res);
+  },
 };
 
 export default api;

@@ -5,6 +5,7 @@ const Blog = require("../models/Blog");
 const User = require("../models/User");
 const multer = require("multer");
 const path = require("path");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 const {
   validateBlogCreate,
   validateComment,
@@ -77,6 +78,42 @@ router.post(
     }
   },
 );
+
+// @route   POST api/blogs/ai-generate
+// @desc    Generate a blog using AI
+router.post("/ai-generate", auth, async (req, res) => {
+  try {
+    const { topic } = req.body;
+
+    if (!topic) {
+      return res.status(400).json({ msg: "Topic is required" });
+    }
+
+    if (!process.env.GEMINI_API_KEY) {
+      return res.status(500).json({ msg: "Gemini API key is missing." });
+    }
+
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const prompt = `Write a highly engaging, detailed blog post about: ${topic}`;
+
+    const result = await model.generateContent({
+      contents: [
+        {
+          parts: [{ text: prompt }]
+        }
+      ]
+    });
+
+    const text = result.response.text();
+
+    res.json({ generatedContent: text });
+
+  } catch (err) {
+    console.error("AI ERROR:", err);
+    res.status(500).json({ msg: err.message });
+  }
+});
 
 // @route   PUT api/blogs/like/:id
 // @desc    Like a blog

@@ -257,5 +257,34 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   };
 
+  // Generate AI Blog
+  window.generateAI = async () => {
+    const topic = document.getElementById("blogTitle").value;
+    if (!topic) {
+      alert("Please enter a Topic or Title first in the input box!");
+      return;
+    }
+
+    const aiBtn = document.getElementById("aiBtn");
+    const originalText = aiBtn.innerHTML;
+    aiBtn.innerHTML = "⏳ Generating...";
+    aiBtn.disabled = true;
+
+    try {
+      const response = await api.generateAIBlog(topic, token);
+      if (response && response.generatedContent) {
+        document.getElementById("blogText").value = response.generatedContent;
+      } else {
+        alert(response.msg || "Failed to generate blog");
+      }
+    } catch (err) {
+      console.error("AI Generation Error:", err);
+      alert("Error generating content: " + (err.message || ""));
+    } finally {
+      aiBtn.innerHTML = originalText;
+      aiBtn.disabled = false;
+    }
+  };
+
   loadProfile();
 });
