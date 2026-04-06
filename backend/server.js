@@ -1,11 +1,15 @@
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, ".env") });
+
+console.log("KEY:", process.env.GEMINI_API_KEY);
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const dotenv = require("dotenv");
-const path = require("path");
+// const path = require("path");
 const fs = require("fs");
+console.log("ENV FILE EXISTS:", fs.existsSync(__dirname + "/.env"));
 
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;

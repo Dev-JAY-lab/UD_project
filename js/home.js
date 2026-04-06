@@ -92,11 +92,22 @@ function createCard(blog) {
 
   // Share Interaction
   const shareBtn = card.querySelector(".share-btn");
-  shareBtn.addEventListener("click", (e) => {
+  shareBtn.addEventListener("click", async (e) => {
     e.stopPropagation();
-    const url = window.location.href + "?id=" + blog._id;
-    navigator.clipboard.writeText(url);
-    alert("Link copied to clipboard!");
+    const url = `${window.location.origin}/blog-detail.html?id=${blog._id}`;
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: blog.title || "Check out this blog!",
+          url: url
+        });
+      } catch (err) {
+        console.error("Error sharing:", err);
+      }
+    } else {
+      navigator.clipboard.writeText(url);
+      alert("Link copied to clipboard!");
+    }
   });
 
   return card;

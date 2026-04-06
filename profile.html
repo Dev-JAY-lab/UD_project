@@ -46,13 +46,13 @@
         <div style="display: flex; gap: 10px; margin-bottom: 10px;">
           <input type="text" id="blogTitle" placeholder="Blog Title (or Topic for AI)..."
             style="width: 76%; padding: 45px; border: 1px solid #ddd; border-radius: 4px;">
-          <button class="toggle-btn" id="aiBtn" onclick="generateAI()"
-            style="white-space: nowrap; padding: 8px 15px; cursor: pointer; display: flex; align-items: center; justify-content: center;">✨</button>
+          <button class="ai-magic-btn" id="aiBtn" onclick="generateAI()">✨ AI Write</button>
         </div>
         <textarea id="blogText" placeholder="Write your blog here..."></textarea>
         <input type="file" id="blogImage" accept="image/*">
         <input type="text" id="imageCaption" placeholder="Image caption (optional)">
-        <button class="toggle-btn" style="margin-top:10px;" onclick="postBlog()">Post</button>
+        <button class="toggle-btn" style="margin-top:10px; width:40%; padding: 12px; font-weight:bold; font-size: 16px;"
+          onclick="postBlog()">Post</button>
       </div>
 
       <div id="blogContainer"></div>
