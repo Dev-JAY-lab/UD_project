@@ -36,8 +36,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         <h1>${blog.title}</h1>
         <div class="meta">By ${blog.author.username} • ${new Date(blog.createdAt).toLocaleDateString()}</div>
         <img src="${blog.image || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800'}" alt="${blog.title}" style="width:100%; border-radius:12px; margin:20px 0;">
-        <div class="content" style="font-size:18px; line-height:1.6; color:var(--text); margin-bottom:40px;">
-            ${blog.content}
+        <div class="content blog-post-content">
+            ${marked.parse(blog.content)}
         </div>
 
         <div class="actions detail-actions" style="border-top:1px solid #eee; padding-top:20px; margin-bottom:40px;">
