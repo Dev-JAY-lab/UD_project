@@ -42,9 +42,32 @@
                     window.location.href = "/login.html";
                 };
             }
+            fetchUnreadNotifications();
         }
 
         if (localStorage.getItem('theme') !== 'light') document.body.classList.add('dark');
+    };
+
+    const fetchUnreadNotifications = async () => {
+        const notifBadge = document.getElementById('notifBadge');
+        if (!notifBadge || !token) return;
+
+        try {
+            const apiRes = await fetch(`${window.location.origin}/api/notifications`, {
+                headers: { 'x-auth-token': token }
+            });
+            const notifs = await apiRes.json();
+            const unreadCount = notifs.filter(n => !n.isRead).length;
+            
+            if (unreadCount > 0) {
+                notifBadge.textContent = unreadCount;
+                notifBadge.style.display = 'inline-block';
+            } else {
+                notifBadge.style.display = 'none';
+            }
+        } catch (err) {
+            console.error('Failed to fetch notifications:', err);
+        }
     };
 
     if (document.readyState === 'loading') {

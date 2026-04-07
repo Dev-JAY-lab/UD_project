@@ -27,13 +27,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       const blogs = data.blogs;
 
       document.getElementById("profileName").textContent = user.username;
-      document.getElementById("profileUsername").textContent =
-        `@${user.username}`;
-      document.getElementById("profileBio").textContent =
-        user.bio || "No bio yet.";
-      document.getElementById("avatarLetter").textContent = user.username
-        .charAt(0)
-        .toUpperCase();
+      document.getElementById("profileUsername").textContent = `@${user.username}`;
+      document.getElementById("profileBio").textContent = user.bio || "No bio yet.";
+
+      const avatarLetterEl = document.getElementById("avatarLetter");
+      const profileImageEl = document.getElementById("profileImage");
+
+      if (user.profilePic) {
+          profileImageEl.src = user.profilePic;
+          profileImageEl.style.display = "block";
+          avatarLetterEl.style.display = "none";
+      } else {
+          profileImageEl.style.display = "none";
+          avatarLetterEl.style.display = "flex";
+          avatarLetterEl.textContent = user.username.charAt(0).toUpperCase();
+      }
 
       const instaLinkEl = document.getElementById("instaLink");
       if (user.instagramLink) {
@@ -283,6 +291,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     } finally {
       aiBtn.innerHTML = originalText;
       aiBtn.disabled = false;
+    }
+  };
+
+  window.uploadProfilePic = async (input) => {
+    if (!input.files || !input.files[0]) return;
+    const file = input.files[0];
+    const formData = new FormData();
+    formData.append("profilePic", file);
+
+    try {
+      const response = await api.updateUserProfile(formData, token);
+      
+      // Update local storage
+      const updatedUser = { ...currentUser, profilePic: response.profilePic };
+      localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+      
+      alert("Profile picture updated!");
+      loadProfile();
+    } catch (err) {
+      console.error("Error uploading profile pic:", err);
+      alert("Failed to upload profile picture.");
     }
   };
 

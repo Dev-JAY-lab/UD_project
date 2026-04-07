@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const Blog = require("../models/Blog");
 const User = require("../models/User");
+const Notification = require("../models/Notification");
 const multer = require("multer");
 const path = require("path");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
@@ -39,7 +40,7 @@ router.get("/", async (req, res) => {
   try {
     const blogs = await Blog.find()
       .populate("author", "username profilePic")
-      .populate("comments.user", "username")
+      .populate("comments.user", "username profilePic")
       .sort({ createdAt: -1 });
     res.json(blogs);
   } catch (err) {
@@ -136,7 +137,32 @@ router.put("/like/:id", auth, async (req, res) => {
       blog.likes.unshift(req.user.id);
     }
 
+
     await blog.save();
+
+    // Create notification for like (if not by the blog author)
+    // Using .some to check for ID because MongoDB returns ObjectIds
+    const isNowLiked = blog.likes.some(id => id.toString() === req.user.id);
+    if (isNowLiked && blog.author.toString() !== req.user.id) {
+      // Fire and forget the notification to avoid blocking the user
+      Notification.findOne({
+        recipient: blog.author,
+        sender: req.user.id,
+        type: "like",
+        blog: blog._id
+      }).then(existingNotif => {
+        if (!existingNotif) {
+          const notification = new Notification({
+            recipient: blog.author,
+            sender: req.user.id,
+            type: "like",
+            blog: blog._id
+          });
+          notification.save().catch(err => console.error("Notif Error:", err));
+        }
+      }).catch(err => console.error("Notif Error:", err));
+    }
+
     res.json(blog.likes);
   } catch (err) {
     console.error(err.message);
@@ -165,11 +191,22 @@ router.post(
       blog.comments.unshift(newComment);
       await blog.save();
 
-      const updatedBlog = await Blog.findById(req.params.id).populate(
-        "comments.user",
-        "username",
-      );
-      res.status(201).json(updatedBlog.comments);
+      // Populate user info directly on the existing blog object to avoid another DB trip
+      await blog.populate("comments.user", "username profilePic");
+
+      // Create notification for comment (if not by the blog author)
+      if (blog.author.toString() !== req.user.id) {
+        const notification = new Notification({
+          recipient: blog.author,
+          sender: req.user.id,
+          type: "comment",
+          blog: blog._id,
+          content: req.body.text
+        });
+        notification.save().catch(err => console.error("Notif Error:", err));
+      }
+
+      res.status(201).json(blog.comments);
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ msg: "Server Error" });

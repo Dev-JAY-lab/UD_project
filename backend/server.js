@@ -1,7 +1,7 @@
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, ".env") });
 
-console.log("KEY:", process.env.GEMINI_API_KEY);
+console.log("API KEY ACTIVATED");
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -38,6 +38,7 @@ app.use((req, res, next) => {
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/blogs", require("./routes/blogs"));
 app.use("/api/users", require("./routes/users"));
+app.use("/api/notifications", require("./routes/notifications"));
 
 // Serve Frontend Files
 const frontendPath = path.join(__dirname, "..");

@@ -1,5 +1,5 @@
-const API_URL = "http://localhost:5000/api";
-
+// const API_URL = "http://localhost:5000/api";
+const API_URL = window.location.origin + "/api";
 // Global response handler
 async function handleResponse(res) {
   if (!res.ok) {
@@ -11,12 +11,12 @@ async function handleResponse(res) {
     }
     throw new Error(errorText || `HTTP error! status: ${res.status}`);
   }
-
+  
   const contentType = res.headers.get("content-type");
   if (contentType && contentType.includes("application/json")) {
     return res.json();
   } else {
-    // some endpoints like delete return raw text or empty json
+    // some endpoints like delete return raw text or empty json 
     const text = await res.text();
     return text ? JSON.parse(text) : {};
   }
@@ -96,13 +96,16 @@ const api = {
   },
 
   async updateUserProfile(userData, token) {
+    const isFormData = userData instanceof FormData;
+    const headers = { "x-auth-token": token };
+    if (!isFormData) {
+      headers["Content-Type"] = "application/json";
+    }
+
     const res = await fetch(`${API_URL}/users/me`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": token,
-      },
-      body: JSON.stringify(userData),
+      headers,
+      body: isFormData ? userData : JSON.stringify(userData),
     });
     return handleResponse(res);
   },
@@ -137,6 +140,29 @@ const api = {
         "x-auth-token": token,
       },
       body: JSON.stringify({ topic }),
+    });
+    return handleResponse(res);
+  },
+
+  async getNotifications(token) {
+    const res = await fetch(`${API_URL}/notifications`, {
+      headers: { "x-auth-token": token },
+    });
+    return handleResponse(res);
+  },
+
+  async markNotifAsRead(id, token) {
+    const res = await fetch(`${API_URL}/notifications/${id}/read`, {
+      method: "PUT",
+      headers: { "x-auth-token": token },
+    });
+    return handleResponse(res);
+  },
+
+  async markAllNotifsAsRead(token) {
+    const res = await fetch(`${API_URL}/notifications/read-all`, {
+      method: "PUT",
+      headers: { "x-auth-token": token },
     });
     return handleResponse(res);
   },

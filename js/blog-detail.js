@@ -34,7 +34,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     container.innerHTML = `
       <article class="blog-detail" style="position:relative">
         <h1>${blog.title}</h1>
-        <div class="meta">By ${blog.author.username} • ${new Date(blog.createdAt).toLocaleDateString()}</div>
+        <div class="meta" style="display:flex; align-items:center; gap:8px;">
+            <img src="${blog.author && blog.author.profilePic ? blog.author.profilePic : `https://ui-avatars.com/api/?name=${encodeURIComponent(blog.author ? blog.author.username : 'User')}&background=random&color=fff`}" 
+                 alt="${blog.author ? blog.author.username : 'Author'}" 
+                 style="width:30px; height:30px; border-radius:50%; object-fit:cover;">
+            By ${blog.author ? blog.author.username : 'Unknown'} • ${new Date(blog.createdAt).toLocaleDateString()}
+        </div>
         <img src="${blog.image || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800'}" alt="${blog.title}" style="width:100%; border-radius:12px; margin:20px 0;">
         <div class="content blog-post-content">
             ${marked.parse(blog.content)}
@@ -50,13 +55,33 @@ document.addEventListener("DOMContentLoaded", async () => {
         <section class="comment-section">
             <h3>Comments (${blog.comments.length})</h3>
             <div id="commentList" style="margin:20px 0;">
-                ${blog.comments.map(c => `
-                    <div class="comment-item" style="padding:15px; border-bottom:1px solid #eee;">
-                        <span style="font-weight:bold;">${c.user ? c.user.username : 'Unknown User'}</span>
-                        <p style="margin-top:5px;">${c.text}</p>
-                        <small style="color:var(--muted);">${new Date(c.createdAt).toLocaleDateString()}</small>
+                ${blog.comments.map(c => {
+                    const user = c.user || { username: 'Unknown User' };
+                    let avatarUrl = user.profilePic ? user.profilePic : "";
+                    
+                    // Ensure the URL starts with / if it's a relative path
+                    if (avatarUrl && !avatarUrl.startsWith('http') && !avatarUrl.startsWith('/')) {
+                        avatarUrl = '/' + avatarUrl;
+                    }
+
+                    const fallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.username)}&background=random&color=fff`;
+                    const src = avatarUrl || fallbackUrl;
+                    
+                    return `
+                    <div class="comment-item" style="display:flex; gap:12px; padding:15px; border-bottom:1px solid var(--border); align-items: flex-start;">
+                        <img src="${src}" 
+                             onerror="this.src='${fallbackUrl}'"
+                             alt="${user.username}"
+                             style="width:42px; height:42px; border-radius:50%; object-fit:cover; border: 2px solid var(--border); flex-shrink:0; background: var(--card);">
+                        <div style="flex-grow:1;">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <span style="font-weight:700; color:var(--text); font-size:14px;">${user.username}</span>
+                                <small style="color:var(--muted); font-size:11px;">${new Date(c.createdAt).toLocaleDateString()}</small>
+                            </div>
+                            <p style="margin-top:4px; color:var(--text); line-height: 1.5; font-size:15px;">${c.text}</p>
+                        </div>
                     </div>
-                `).join('')}
+                `}).join('')}
             </div>
             
             <div class="add-comment" style="margin-top:20px;">

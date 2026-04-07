@@ -31,13 +31,14 @@
             <a href="blog.html">Blogs</a>
             <a href="profile.html">Profile</a>
             <a href="library.html">Library</a>
+            <a href="notifications.html" class="nav-link-notif">Notifications <span id="notifBadge" class="unread-badge" style="display:none">0</span></a>
             <a href="about.html">About</a>
             <a href="contactus.html">Contact Us</a>
         </div>
 
         <div class="user-info">
             <span id="userName" class="user-name"></span>
-            <button class="btn-logout" id="logoutBtn">Logout</button>
+            <button class="btn-logout" id="logoutBtn">Logout ➜]</button>
         </div>
 
         <button class="toggle-btn" onclick="toggleDark()"><img src="assets/dark-mode-6682.svg" alt="Toggle"></button>
@@ -50,6 +51,7 @@
   © 2026 UrbanDiary | Designed with Love ♥
 </footer>
 
+    <script src="js/auth.js"></script>
     <script type="module" src="js/blog-detail.js" defer></script>
     <script>
         function toggleDark() {

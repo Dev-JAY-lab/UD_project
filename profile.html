@@ -24,6 +24,7 @@
       <a href="blog.html">Blogs</a>
       <a href="profile.html">Profile</a>
       <a href="library.html">Library</a>
+      <a href="notifications.html" class="nav-link-notif">Notifications <span id="notifBadge" class="unread-badge" style="display:none">0</span></a>
       <a href="about.html">About</a>
       <a href="contactus.html">Contact Us</a>
     </div>
@@ -61,8 +62,14 @@
 
     <!-- RIGHT PROFILE -->
     <div class="sidebar-profile">
-
-      <div class="avatar" id="avatarLetter">D</div>
+      <div class="avatar-container" onclick="document.getElementById('profilePicInput').click()" style="cursor:pointer; position:relative; width: 80px; margin: 0 auto 15px;">
+        <div class="avatar" id="avatarLetter" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; font-size: 32px;">D</div>
+        <img id="profileImage" src="" style="display:none; width:80px; height:80px; border-radius:50%; object-fit:cover;">
+        <div class="avatar-overlay" style="position:absolute; bottom:0; right:0; background:var(--primary); border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; border:2px solid var(--bg);">
+          <span style="color:white; font-size:12px;">📷</span>
+        </div>
+      </div>
+      <input type="file" id="profilePicInput" style="display:none" accept="image/*" onchange="uploadProfilePic(this)">
       <h3 id="profileName">DemoUser</h3>
       <div class="username" id="profileUsername"></div>
       <div class="bio" id="profileBio">Blogger</div>

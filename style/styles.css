@@ -4234,3 +4234,5 @@ body:not(.dark) .ai-magic-btn:hover {
     font-weight: 700;
     color: var(--text);
 }
+@media (min-width: 1px) { .nav-link-notif { position: relative; } .unread-badge { position: absolute; top: -5px; right: -10px; background: #ff4b2b; color: white; font-size: 10px; padding: 2px 5px; border-radius: 10px; min-width: 15px; text-align: center; font-weight: 700; line-height: 1; pointer-events: none; } }
+.avatar-container { position: relative; border-radius: 50%; border: 3px solid var(--border); transition: all 0.3s ease; box-shadow: 0 4px 12px var(--shadow-light); } .avatar-container:hover { transform: scale(1.05); border-color: var(--primary); } .avatar-overlay { opacity: 0.8; transition: all 0.3s ease; background: var(--primary) !important; } .avatar-container:hover .avatar-overlay { opacity: 1; transform: scale(1.1); } .sidebar-profile .avatar { margin: 0; }
