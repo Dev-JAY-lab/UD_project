@@ -110,9 +110,9 @@ http://localhost:5000
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 Author / Contributors
 
-Jay (Dev-JAY-lab)  / Chirah (chirag2507)
+Jay (Dev-JAY-lab)  / Chirag (chirag2507)
 
 ---
 
