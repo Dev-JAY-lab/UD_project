@@ -202,14 +202,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (err) {
       console.error("Error creating blog:", err);
       let errorMsg = "An error occurred while publishing";
+      
       try {
+        // Try parsing if it's stringified JSON from express-validator
         const errObj = JSON.parse(err.message);
         if (errObj.errors && errObj.errors.length > 0) {
           errorMsg = errObj.errors.map(e => e.msg).join("\n");
         } else if (errObj.msg) {
           errorMsg = errObj.msg;
         }
-      } catch(e) { /* ignore JSON parse error */ }
+      } catch(e) { 
+        // If it's already a plain string (like from the rate limiter), use it directly
+        if (err.message) {
+            errorMsg = err.message;
+        }
+      }
       
       alert(errorMsg);
     }
@@ -275,20 +282,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const aiBtn = document.getElementById("aiBtn");
     const originalText = aiBtn.innerHTML;
-    aiBtn.innerHTML = "⏳ Generating...";
+    
+    // Rotating messages to make it feel faster
+    const messages = ["⏳ Thinking...", "✍️ Writing...", "🪄 Polishing..."];
+    let msgIndex = 0;
     aiBtn.disabled = true;
+    aiBtn.innerHTML = messages[0];
+    
+    const interval = setInterval(() => {
+      msgIndex = (msgIndex + 1) % messages.length;
+      aiBtn.innerHTML = messages[msgIndex];
+    }, 2000);
 
     try {
       const response = await api.generateAIBlog(topic, token);
       if (response && response.generatedContent) {
         document.getElementById("blogText").value = response.generatedContent;
       } else {
-        alert(response.msg || "Failed to generate blog");
+        alert(response?.msg || "Failed to generate blog. Please try later.");
       }
     } catch (err) {
       console.error("AI Generation Error:", err);
-      alert("Error generating content: " + (err.message || ""));
+      // If error message is weird, show a cleaner one
+      const displayError = err.message || "Disconnected or server busy";
+      alert("Error generating content: " + displayError);
     } finally {
+      clearInterval(interval);
       aiBtn.innerHTML = originalText;
       aiBtn.disabled = false;
     }

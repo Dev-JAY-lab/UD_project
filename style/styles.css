@@ -4172,67 +4172,260 @@ body:not(.dark) .ai-magic-btn:hover {
 
 /* --- BLOG CONTENT FORMATTING (Markdown Styles) --- */
 .blog-post-content {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: var(--text);
-    margin-bottom: 40px;
-    font-family: 'Inter', sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 40px;
+  font-family: 'Inter', sans-serif;
 }
 
 .blog-post-content h1,
 .blog-post-content h2,
 .blog-post-content h3 {
-    margin: 1.5rem 0 1rem;
-    color: var(--text);
-    font-weight: 700;
-    line-height: 1.25;
+  margin: 1.5rem 0 1rem;
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.25;
 }
 
-.blog-post-content h1 { font-size: 2.2rem; }
-.blog-post-content h2 { font-size: 1.8rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-.blog-post-content h3 { font-size: 1.5rem; }
+.blog-post-content h1 {
+  font-size: 2.2rem;
+}
+
+.blog-post-content h2 {
+  font-size: 1.8rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.blog-post-content h3 {
+  font-size: 1.5rem;
+}
 
 .blog-post-content p {
-    margin-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
-.blog-post-content ul, 
+.blog-post-content ul,
 .blog-post-content ol {
-    margin-bottom: 1.25rem;
-    padding-left: 2rem;
+  margin-bottom: 1.25rem;
+  padding-left: 2rem;
 }
 
 .blog-post-content li {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .blog-post-content blockquote {
-    border-left: 4px solid var(--primary);
-    padding: 0.5rem 1.5rem;
-    background: var(--card);
-    margin: 1.5rem 0;
-    font-style: italic;
-    color: var(--muted);
+  border-left: 4px solid var(--primary);
+  padding: 0.5rem 1.5rem;
+  background: var(--card);
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--muted);
 }
 
 .blog-post-content code {
-    background: var(--card);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-family: monospace;
-    font-size: 0.9em;
-    border: 1px solid var(--border);
+  background: var(--card);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+  border: 1px solid var(--border);
 }
 
 .blog-post-content hr {
-    margin: 2rem 0;
-    border: 0;
-    border-top: 1px solid var(--border);
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
 }
 
 .blog-post-content strong {
-    font-weight: 700;
-    color: var(--text);
+  font-weight: 700;
+  color: var(--text);
 }
-@media (min-width: 1px) { .nav-link-notif { position: relative; } .unread-badge { position: absolute; top: -5px; right: -10px; background: #ff4b2b; color: white; font-size: 10px; padding: 2px 5px; border-radius: 10px; min-width: 15px; text-align: center; font-weight: 700; line-height: 1; pointer-events: none; } }
-.avatar-container { position: relative; border-radius: 50%; border: 3px solid var(--border); transition: all 0.3s ease; box-shadow: 0 4px 12px var(--shadow-light); } .avatar-container:hover { transform: scale(1.05); border-color: var(--primary); } .avatar-overlay { opacity: 0.8; transition: all 0.3s ease; background: var(--primary) !important; } .avatar-container:hover .avatar-overlay { opacity: 1; transform: scale(1.1); } .sidebar-profile .avatar { margin: 0; }
+
+@media (min-width: 1px) {
+  .nav-link-notif {
+    position: relative;
+  }
+
+  .unread-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: #ff4b2b;
+    color: white;
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 10px;
+    min-width: 15px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1;
+    pointer-events: none;
+  }
+}
+
+.avatar-container {
+  position: relative;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--shadow-light);
+}
+
+.avatar-container:hover {
+  transform: scale(1.05);
+  border-color: var(--primary);
+}
+
+.avatar-overlay {
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  background: var(--primary) !important;
+}
+
+.avatar-container:hover .avatar-overlay {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.sidebar-profile .avatar {
+  margin: 0;
+}
+
+/* ================= USER PUBLIC PROFILE PAGE ================= */
+.profile-page-container {
+  max-width: 935px;
+  margin: 40px auto;
+  padding: 20px;
+  display: block !important;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 20px 20px 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-image-container {
+  flex-shrink: 0;
+  width: 150px;
+  height: 150px;
+}
+
+.profile-image-container img,
+.profile-image-container .avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.profile-image-container .avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  background: var(--primary);
+  color: white;
+}
+
+.profile-info {
+  flex-grow: 1;
+}
+
+.profile-info h2 {
+  font-size: 28px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.profile-stats span b {
+  color: var(--text);
+}
+
+.profile-bio {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.profile-bio .name {
+  font-weight: 600;
+  display: block;
+}
+
+.profile-blogs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  padding: 30px 0;
+}
+
+.user-blog-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--card);
+}
+
+.user-blog-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+.user-blog-card:hover img {
+  filter: brightness(0.7);
+}
+
+.user-blog-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* ================= DESIGNER CREDITS ================= */
+.designer-credits {
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px dashed var(--border);
+  letter-spacing: 0.5px;
+}
+
+.designer-credits strong {
+  color: var(--text);
+  font-weight: 600;
+}

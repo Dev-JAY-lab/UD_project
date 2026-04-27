@@ -3,22 +3,33 @@ const API_URL = window.location.origin + "/api";
 // Global response handler
 async function handleResponse(res) {
   if (!res.ok) {
-    const errorText = await res.text();
-    if (res.status === 401 || (res.status === 404 && errorText.includes("User not found"))) {
+    let errorMsg = `HTTP error! status: ${res.status}`;
+    try {
+      const errorData = await res.json();
+      errorMsg = errorData.msg || errorData.message || errorMsg;
+    } catch (e) {
+      const errorText = await res.text();
+      errorMsg = errorText || errorMsg;
+    }
+
+    if (res.status === 401 || (res.status === 404 && errorMsg.includes("User not found"))) {
       localStorage.clear();
       window.location.href = "login.html";
       return;
     }
-    throw new Error(errorText || `HTTP error! status: ${res.status}`);
+    throw new Error(errorMsg);
   }
   
   const contentType = res.headers.get("content-type");
   if (contentType && contentType.includes("application/json")) {
     return res.json();
   } else {
-    // some endpoints like delete return raw text or empty json 
     const text = await res.text();
-    return text ? JSON.parse(text) : {};
+    try {
+        return text ? JSON.parse(text) : {};
+    } catch (e) {
+        return { msg: text || "An unexpected error occurred" };
+    }
   }
 }
 

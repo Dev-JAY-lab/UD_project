@@ -46,4 +46,12 @@ module.exports = {
   apiLimiter,
   blogLimiter,
   commentLimiter,
+  aiLimiter: rateLimit({
+    windowMs: 60 * 1000, // 1 minute
+    max: 5, // Strictly 5 per minute for demo safety
+    message: "AI is thinking, please wait a moment before trying again.",
+    standardHeaders: true,
+    legacyHeaders: false,
+    skip: (req) => process.env.NODE_ENV === "test",
+  }),
 };
