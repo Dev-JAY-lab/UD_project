@@ -184,10 +184,18 @@
             const res = await fetch(`${API_URL}/notifications`, {
                 headers: { 'x-auth-token': token }
             });
+            if (!res.ok) {
+                if (res.status === 401) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+                throw new Error('Failed to fetch notifications');
+            }
             const data = await res.json();
             renderNotifications(data);
         } catch (err) {
             feed.innerHTML = '<div class="empty-state">Failed to load notifications</div>';
+            console.error(err);
         }
     }
 
@@ -208,12 +216,12 @@
 
         feed.innerHTML = notifs.map(n => `
             <div class="notification-card ${n.isRead ? '' : 'unread'}" data-id="${n._id}">
-                <img src="${n.sender.profilePic || 'assets/default-avatar.png'}" class="notification-avatar" onerror="this.src='https://via.placeholder.com/48'">
+                <img src="${n.sender?.profilePic || 'assets/default-avatar.png'}" class="notification-avatar" onerror="this.src='https://via.placeholder.com/48'">
                 <div class="notification-content">
                     <p class="notification-msg">
-                        <strong>${n.sender.username}</strong> 
-                        ${n.type === 'like' ? 'liked your blog' : 'commented on your blog'}: 
-                        "<em>${n.blog.title}</em>"
+                        <strong>${n.sender?.username || 'Unknown User'}</strong> 
+                        ${n.type === 'like' ? 'liked' : 'commented on'} 
+                        ${n.blog ? 'your blog: "<em>' + n.blog.title + '</em>"' : 'a deleted blog'}
                         ${n.content ? `<br><small style="color: #666;">"${n.content}"</small>` : ''}
                     </p>
                     <div class="notification-time">${new Date(n.createdAt).toLocaleString()}</div>

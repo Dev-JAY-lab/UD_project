@@ -45,7 +45,7 @@ async function fetchUnreadNotifications() {
     if (!notifBadge || !token) return;
 
     try {
-        const apiRes = await fetch(`${window.location.origin}/api/notifications`, {
+        const apiRes = await fetch(`https://ud-project.onrender.com/api/notifications`, {
             headers: { 'x-auth-token': token }
         });
         const notifs = await apiRes.json();
@@ -65,18 +65,21 @@ async function fetchUnreadNotifications() {
 /* ================= MAIN ================= */
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ================= DARK MODE ================= */
+  /* ================= THEME CYCLE ================= */
+  const themes = ["light", "dark", "purple", "pink"];
   window.toggleDark = function () {
-    document.body.classList.toggle("dark");
-    localStorage.setItem(
-      "theme",
-      document.body.classList.contains("dark") ? "dark" : "light"
-    );
+    let currentTheme = localStorage.getItem("theme") || "light";
+    if (!themes.includes(currentTheme)) currentTheme = "light";
+    let nextTheme = themes[(themes.indexOf(currentTheme) + 1) % themes.length];
+    
+    document.body.classList.remove("dark", "purple", "pink");
+    if (nextTheme !== "light") document.body.classList.add(nextTheme);
+    localStorage.setItem("theme", nextTheme);
   };
 
   const savedTheme = localStorage.getItem("theme");
-  if (savedTheme !== "light") {
-    document.body.classList.add("dark");
+  if (savedTheme && savedTheme !== "light" && themes.includes(savedTheme)) {
+    document.body.classList.add(savedTheme);
   }
 
   /* ================= NAVIGATION & LOGOUT ================= */
