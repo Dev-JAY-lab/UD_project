@@ -34,7 +34,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       const profileImageEl = document.getElementById("profileImage");
 
       if (user.profilePic) {
-          profileImageEl.src = user.profilePic;
+          // Prepend Render backend URL if it's a relative path
+          const fullImageUrl = user.profilePic.startsWith('http') ? user.profilePic : 'https://ud-project.onrender.com' + user.profilePic;
+          profileImageEl.src = fullImageUrl;
           profileImageEl.style.display = "block";
           avatarLetterEl.style.display = "none";
       } else {
