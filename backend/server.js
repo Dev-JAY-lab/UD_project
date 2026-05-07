@@ -12,6 +12,7 @@ console.log("ENV FILE EXISTS:", fs.existsSync(__dirname + "/.env"));
 
 
 const app = express();
+app.set("trust proxy", 1);
 const PORT = process.env.PORT || 5000;
 
 // Create uploads directory if it doesn't exist

@@ -3,7 +3,7 @@ const rateLimit = require("express-rate-limit");
 // Auth rate limiter - stricter limits
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // 5 requests per windowMs
+  max: 20, // Increased to 20 requests to allow multiple devices on same Wi-Fi
   message: "Too many login/signup attempts, please try again later",
   standardHeaders: true,
   legacyHeaders: false,
