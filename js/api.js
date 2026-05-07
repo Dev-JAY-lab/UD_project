@@ -1,14 +1,13 @@
-// const API_URL = "http://localhost:5000/api";
-const API_URL = window.location.origin + "/api";
+const API_URL = "https://ud-project.onrender.com/api";
 // Global response handler
 async function handleResponse(res) {
   if (!res.ok) {
     let errorMsg = `HTTP error! status: ${res.status}`;
+    const errorText = await res.text();
     try {
-      const errorData = await res.json();
+      const errorData = JSON.parse(errorText);
       errorMsg = errorData.msg || errorData.message || errorMsg;
     } catch (e) {
-      const errorText = await res.text();
       errorMsg = errorText || errorMsg;
     }
 
