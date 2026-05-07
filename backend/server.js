@@ -42,6 +42,17 @@ app.use("/api/notifications", require("./routes/notifications"));
 
 // Removed static frontend serving as Netlify will handle the frontend.
 
+// Serve Frontend Files (Restored for local testing with run_project.bat)
+const frontendPath = path.join(__dirname, "..");
+app.use(express.static(frontendPath));
+
+// Catch-all route to serve index.html for any non-API request
+app.get("*", (req, res) => {
+  if (!req.path.startsWith("/api")) {
+    res.sendFile(path.join(frontendPath, "index.html"));
+  }
+});
+
 // Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
